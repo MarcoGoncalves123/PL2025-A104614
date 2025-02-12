@@ -15,12 +15,12 @@ def On_Off(linha):
         if(linha[i] == '='):
             print(res) 
             
-        if linha[i].lower() == "o":
-            if(linha[i+1].lower() == "n"):
+        if linha[i].lower() == "o": 
+            if(i + 1 < len(linha) and linha[i+1].lower() == "n"):
                 on = True
-            elif(linha[i+1].lower() == "f"):
-                if(linha[i+2].lower() == "f"):
+            elif(i + 1 < len(linha) and linha[i+1].lower() == "f"):
+                if(i + 1 < len(linha) and linha[i+2].lower() == "f"):
                     on = False
         i+=1
     
-On_Off("12abc34=On56xyz789=OFF987=Onabc123=")
+On_Off("12abc34=On56xyz789=OFF987=Onabc123=o1")
