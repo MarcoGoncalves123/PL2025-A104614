@@ -24,3 +24,5 @@ def On_Off(linha):
         i+=1
     
 On_Off("12abc34=On56xyz789=OFF987=Onabc123=o1")
+#On_Off("124otngronrg03423423=On113OFF32ifnmm=3203f932f=930=3249ON=1456O=")
+
