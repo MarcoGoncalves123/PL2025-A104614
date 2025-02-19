@@ -16,7 +16,9 @@ class Obra:
         
 
 def read_line_by_line(path):
-    obras = []
+    compositores = []
+    obras_por_periodo = {}
+    obras_por_periodo_e_titulo = {}
     buffer = ""
     pattern = '^(.*);""?"?(.*);(\d*);([^;]+);([^;]+);(\d{2}:\d{2}:\d{2});([^\n]+)$'
     f = open(path,'r',encoding='utf-8')
@@ -33,11 +35,47 @@ def read_line_by_line(path):
             compositor = match.group(5)
             duracao = match.group(6)
             id = match.group(7)
-            obras.append(Obra(nome, desc, ano, periodo, compositor, duracao,id))
-            buffer = ""
-    return obras
+            obra = Obra(nome, desc, ano, periodo, compositor, duracao,id)
             
+            compositores.append(compositor)
+            
+            if obras_por_periodo.get(periodo) is None:
+                obras_por_periodo[periodo] = [obra]
+            else:
+                obras_por_periodo[periodo].append(obra)
         
-read_line_by_line("TPC2\\obras.csv")
-
-# ^(.*);"(.*)";(\d*);(\w*);(.*);(\d{2}:\d{2}:\d{2});
+            if obras_por_periodo_e_titulo.get(periodo) is None:
+                obras_por_periodo_e_titulo[periodo] = [nome]
+            else:
+                obras_por_periodo_e_titulo[periodo].append(nome)
+            
+            buffer = ""
+    return obras_por_periodo_e_titulo,compositores,obras_por_periodo
+            
+    
+def main():
+    obras_por_periodo_e_titulo,compositores,obras_por_periodo = read_line_by_line("TPC2\\obras.csv")
+    
+    # Query 1
+    compositores.sort()
+    print()
+    print("-----------------------------------Lista ordenada dos compositores musicais-----------------------------------")
+    print(compositores)
+        
+    # Query 2
+    print()
+    print("-----------------------------------Quantas obras por período-----------------------------------")
+    for periodo,lista in obras_por_periodo.items():
+        print(f'Período: {periodo} | Quantidade: {(len(lista))}')
+    
+            
+    # Query 3
+    print()
+    print("-----------------------------------Dicionário de obras por período-----------------------------------")
+    for periodo,lista in obras_por_periodo_e_titulo.items():
+        lista.sort()
+        print("-------------------------------")
+        print(f'Período: {periodo} | Obras: {lista}')
+        
+if __name__ == "__main__":
+    main()
