@@ -20,7 +20,7 @@ def read_line_by_line(path):
     obras_por_periodo = {}
     obras_por_periodo_e_titulo = {}
     buffer = ""
-    pattern = '^(.*);""?"?(.*);(\d*);([^;]+);([^;]+);(\d{2}:\d{2}:\d{2});([^\n]+)$'
+    pattern = '^([^;]+);"?((?:[^"]|"{0,2})*)"?;(\d*);([^;]+);([^;]+);(\d{2}:\d{2}:\d{2});([^\n]+)$'
     f = open(path,'r',encoding='utf-8')
     next(f)
     for linha in f.readlines():
@@ -54,13 +54,16 @@ def read_line_by_line(path):
             
     
 def main():
-    obras_por_periodo_e_titulo,compositores,obras_por_periodo = read_line_by_line("TPC2\\obras.csv")
+    obras_por_periodo_e_titulo,compositores,obras_por_periodo = read_line_by_line("obras.csv")
     
     # Query 1
     compositores.sort()
     print()
     print("-----------------------------------Lista ordenada dos compositores musicais-----------------------------------")
-    print(compositores)
+    for compositor in compositores:
+        print(compositor)
+    
+    
         
     # Query 2
     print()
@@ -75,7 +78,11 @@ def main():
     for periodo,lista in obras_por_periodo_e_titulo.items():
         lista.sort()
         print("-------------------------------")
-        print(f'Período: {periodo} | Obras: {lista}')
+        print(f'Período: {periodo}')
+        print(" ")
+        print("obras:")
+        for item in lista:
+            print(" " + item)
         
 if __name__ == "__main__":
     main()
