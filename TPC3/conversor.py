@@ -9,8 +9,6 @@ def conversor(path):
     pattern_for_italic = r"\*([^*]+)\*"  
     pattern_for_image = r"!\[(.*)\]\((.*)\)"
     pattern_for_link = r"\[(.*)\]\((.*)\)"
-
-    
     pattern_for_list = r"(\d+\.)\s(.*)"  
 
     with open(path, 'r', encoding='utf-8') as f:
