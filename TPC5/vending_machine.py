@@ -20,7 +20,7 @@ def listar_stock(stock):
         print(f"{product['cod']:<5} {product['nome']:<25} {product['quant']:<10} {product['preco']:<7.2f}")
 
 def inserir_moeda(pedido):
-    pattern = r'(\d+)(e|c)'  
+    pattern = r'2e|1e|50c|20c|10c|5c'  
     matches = re.findall(pattern, pedido)  
     saldo = 0
     if matches:
@@ -113,8 +113,7 @@ def adicionar(stock):
     
     stock[cod] = novo_produto
     print("Produto adicionado com sucesso")    
-    
-    
+       
 def devolve_troco(saldo):
     euros,centimos = saldo_em_euros(saldo)
     
@@ -122,62 +121,52 @@ def devolve_troco(saldo):
     vinte_c = 0
     dez_c = 0
     cinco_c = 0
-    dois_c = 0
-    um_c = 0
-    
+    um_e = 0
+    dois_e = 0
+
     while centimos != 0:
-        if centimos >= 50:
+        while centimos >= 50:
             cinquenta_c += 1
             centimos -= 50
-            continue
         
-        if centimos >= 20:
+        while centimos >= 20:
             vinte_c += 1
             centimos -= 20
-            continue
             
-        if centimos >= 10:
+        while centimos >= 10:
             dez_c += 1
             centimos -= 10
-            continue
     
-        if centimos >= 5:
+        while centimos >= 5:
             cinco_c += 1
             centimos -= 5
-            continue
-        
-        if centimos >= 5:
-            cinco_c += 1
-            centimos -= 5
-            continue
             
-        if centimos >= 2:
-            dois_c += 1
-            centimos -= 2
-            continue
-        
-        if centimos >= 1:
-            um_c += 1
-            centimos -= 1
-            continue
-        
+        while centimos >= 5:
+            cinco_c += 1
+            centimos -= 5
+                    
     str = "maq: Pode retirar o troco:"
     
-    if euros > 0:
-        str += (f"{euros}x 1e")
+    while euros >= 2:
+        dois_e += 1
+        euros -= 2
+    
+    str += (f"{dois_e}x2e ")
+
+    while euros >= 1:
+        um_e += 1
+        euros -= 1
+        
+    str += (f"{um_e}x1e ")
     
     if cinquenta_c > 0:
-        str += (f" {cinquenta_c}x50c")
+        str += (f"{cinquenta_c}x50c ")
     if vinte_c > 0:
-        str += (f" {vinte_c}x20c")
+        str += (f"{vinte_c}x20c ")
     if dez_c > 0:
-        str += (f" {dez_c}x10c")
+        str += (f"{dez_c}x10c ")
     if cinco_c > 0:
-        str += (f" {cinco_c}x5c")
-    if dois_c > 0:
-        str += (f" {dois_c}x2c")
-    if um_c > 0:
-        str += (f" {um_c}x1c")
+        str += (f"{cinco_c}x5c ")
     
     print(str)
     print("maq: Até à próxima.")
