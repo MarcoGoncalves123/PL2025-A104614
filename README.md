@@ -12,3 +12,7 @@ Tarefas Semanais
 - [TPC2](https://github.com/MarcoGoncalves123/PL2025-A104614/tree/main/TPC2)
 - [TPC3](https://github.com/MarcoGoncalves123/PL2025-A104614/tree/main/TPC3) 
 - [TPC4](https://github.com/MarcoGoncalves123/PL2025-A104614/tree/main/TPC4)
+- [TPC5](https://github.com/MarcoGoncalves123/PL2025-A104614/tree/main/TPC5)
+- [TPC6](https://github.com/MarcoGoncalves123/PL2025-A104614/tree/main/TPC6)
+
+
