@@ -7,11 +7,9 @@ Exp ->  Termo "+" Exp
 Termo ->  Fator "*" Termo
     |     Fator 
 
-Fator -> "(" Exp ")" | num | id  
+Fator -> "(" Exp ")" | num 
 
 --------------------------------------------------
-
-Z -> Exp "$"
 
 Exp -> Termo Exp2 
 Exp2 -> "+" Exp
@@ -22,5 +20,5 @@ Termo -> Fator Termo2
 Termo2 -> "*" Termo
         | Epsilon
 
-Fator -> "(" Exp ")" | num | id  
+Fator -> "(" Exp ")" | num 
 
