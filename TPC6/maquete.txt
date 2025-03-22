@@ -1,0 +1,26 @@
+T -> {"+", "-", "*", "(", ")", num}
+
+Exp ->  Termo "+" Exp
+    |   Termo "-" Exp
+    |   Termo 
+
+Termo ->  Fator "*" Termo
+    |     Fator 
+
+Fator -> "(" Exp ")" | num | id  
+
+--------------------------------------------------
+
+Z -> Exp "$"
+
+Exp -> Termo Exp2 
+Exp2 -> "+" Exp
+    |   "-" Exp
+    |   Epsilon
+
+Termo -> Fator Termo2
+Termo2 -> "*" Termo
+        | Epsilon
+
+Fator -> "(" Exp ")" | num | id  
+
